@@ -1,18 +1,25 @@
-const API_BASE_URL = "http://127.0.0.1:5000/api";
+
+const API_BASE_URL = "https://mediqueue-30qf.onrender.com/api";
 
 export const getAuthHeaders = () => {
   const token = localStorage.getItem("token");
+
   const headers = {
     "Content-Type": "application/json"
   };
+
   if (token) {
     headers["Authorization"] = `Bearer ${token}`;
   }
+
   return headers;
 };
 
 export const apiFetch = async (endpoint, options = {}) => {
-  const url = `${API_BASE_URL}${endpoint.startsWith("/") ? endpoint : `/${endpoint}`}`;
+  const url = `${API_BASE_URL}${
+    endpoint.startsWith("/") ? endpoint : `/${endpoint}`
+  }`;
+
   const headers = {
     ...getAuthHeaders(),
     ...(options.headers || {})
@@ -26,9 +33,13 @@ export const apiFetch = async (endpoint, options = {}) => {
   const data = await response.json().catch(() => ({}));
 
   if (!response.ok) {
-    const error = new Error(data.message || `Request failed with status ${response.status}`);
+    const error = new Error(
+      data.message || `Request failed with status ${response.status}`
+    );
+
     error.status = response.status;
     error.data = data;
+
     throw error;
   }
 
@@ -36,4 +47,3 @@ export const apiFetch = async (endpoint, options = {}) => {
 };
 
 export default apiFetch;
-
