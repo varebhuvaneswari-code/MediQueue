@@ -15,6 +15,8 @@ const connectDB = async () => {
         serverSelectionTimeoutMS: 4000
       });
       console.log("✅ MongoDB Connected Successfully!");
+      console.log("DATABASE NAME:", mongoose.connection.name);
+      console.log("DATABASE HOST:", mongoose.connection.host);
       connected = true;
       break;
     } catch (err) {

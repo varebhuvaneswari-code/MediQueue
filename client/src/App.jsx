@@ -13,6 +13,7 @@ import DoctorDashboard from "./pages/DoctorDashboard";
 import DoctorRegister from "./pages/DoctorRegister";
 import AdminDashboard from "./pages/AdminDashboard";
 import TrackQueuePage from "./pages/TrackQueuePage";
+import DoctorProfile from "./pages/DoctorProfile";
 
 import "./App.css";
 
@@ -35,6 +36,7 @@ function App() {
               <Route path="/track-queue" element={<TrackQueuePage />} />
               {/* Fallback route */}
               <Route path="*" element={<Navigate to="/" replace />} />
+              <Route path="/doctors/:id" element={<DoctorProfile />} />
             </Routes>
           </main>
           <Footer />

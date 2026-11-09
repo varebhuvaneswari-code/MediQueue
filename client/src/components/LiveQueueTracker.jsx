@@ -82,6 +82,34 @@ function LiveQueueTracker({ appointmentId }) {
   return (
     <div className={`live-tracker-card ${isMyTurn ? "status-my-turn" : ""}`}>
       {/* Turn Alert Banner */}
+      {/* SMART QUEUE ALERT */}
+{!isMyTurn &&
+  !isCompleted &&
+  !isCancelled &&
+  patientsAhead !== undefined &&
+  patientsAhead !== null &&
+  patientsAhead >= 0 &&
+  patientsAhead <= 2 && (
+    <div className="smart-queue-alert">
+      <span className="smart-queue-alert-icon">🔔</span>
+
+      <div>
+        <h3>
+          {patientsAhead === 0
+            ? "YOU ARE NEXT!"
+            : "YOUR TURN IS APPROACHING"}
+        </h3>
+
+        <p>
+          {patientsAhead === 0
+            ? "Please stay ready. You may be called shortly."
+            : `Only ${patientsAhead} ${
+                patientsAhead === 1 ? "patient" : "patients"
+              } ahead of you. Get ready for your consultation!`}
+        </p>
+      </div>
+    </div>
+  )}
       {isMyTurn && (
         <div className="turn-alert-banner">
           <span className="bell-icon">🔔</span>

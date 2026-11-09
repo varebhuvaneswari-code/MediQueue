@@ -1,6 +1,7 @@
 import express from "express";
 import {
   bookAppointment,
+  getAvailableSlots,
   getMyAppointments,
   getAppointmentById,
   cancelAppointment,
@@ -19,6 +20,12 @@ router.get("/admin/overview", authMiddleware, authorizeRoles("admin"), getAdminO
 
 // Get specific appointment
 router.get("/:id", authMiddleware, getAppointmentById);
+router.get(
+  "/available-slots",
+  authMiddleware,
+  authorizeRoles("patient"),
+  getAvailableSlots
+);
 
 // Cancel appointment
 router.put("/:id/cancel", authMiddleware, cancelAppointment);
